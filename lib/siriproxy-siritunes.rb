@@ -10,7 +10,7 @@ require 'siri_objects'
 # Remember to add other plugins to the "config.yml" file if you create them!
 ######
 
-class SiriProxy::Plugin::SiriIMDB < SiriProxy::Plugin
+class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
   def initialize(config)
     #if you have custom configuration options, process them here!
   end
