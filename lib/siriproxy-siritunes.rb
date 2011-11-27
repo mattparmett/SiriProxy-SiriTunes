@@ -1,6 +1,6 @@
 require 'cora'
 require 'siri_objects'
-#require 'win32ole'
+require 'win32ole'
 
 #######
 # This is a "hello world" style plugin. It simply intercepts the phrase "text siri proxy" and responds
