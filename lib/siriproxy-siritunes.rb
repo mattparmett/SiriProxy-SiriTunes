@@ -28,7 +28,6 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 			album_tracks = library.Search(name, 3)
 			if !album_tracks #album wasn't found.  We give up.
 				return "Sorry, I couldn't find " + name + " in your library."
-				request_completed
 			else
 				songs = []
 				for track in album_tracks
@@ -38,11 +37,9 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 				if !song
 					#We give up
 					return "Sorry, I couldn't find " + name + " in your library."
-					request_completed
 				else
 					song.Play
 					return "Playing " + name + "."
-					request_completed
 				end
 			end
 		end
@@ -54,18 +51,15 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 		if !song
 			#this should never happen. let's print a message if it does
 			puts "The artist was found but the song is null."
-			request_completed
 		else
 			songNum = rand(songs.length)
 			song = songs[songNum]
 			song.Play
 			return "Playing " + name + "."
-			request_completed
 		end
 	else
 		song.Play
 		return "Playing " + name + "."
-		request_completed
 	end
   end
   
@@ -75,41 +69,36 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 	if userAction == 'pause' or userAction == 'pause '
 		itunes.PlayPause
 		return "iTunes is now paused."
-		request_completed
 	elsif userAction == 'play' or userAction == 'play '
 		itunes.PlayPause
 		return "iTunes is now playing."
-		request_completed
 	elsif userAction == 'next song' or userAction == 'next song '
 		itunes.NextTrack
 		return "Skipping to the next song."
-		request_completed
 	elsif userAction == 'previous song' or userAction == 'previous song '
 		itunes.PreviousTrack
 		return "Skipping to the previous song."
-		request_completed
 	elsif userAction == 'lower the volume' or userAction == 'lower the volume '
 		itunes.SoundVolume = itunes.SoundVolume - 20
 		return "Lowering the volume."
-		request_completed
 	elsif userAction == 'raise the volume' or userAction == 'raise the volume '
 		itunes.SoundVolume = itunes.SoundVolume + 20
 		return "Raising the volume."
-		request_completed
 	else
 		return "Sorry, I didn't understand your request."
-		request_completed
 	end
   end
  
   listen_for /itunes put on (.*)/i do |name|
 	response = playReq(name)
 	say response
+	request_completed
   end
   
   listen_for /i tunes put on (.*)/i do |name|
 	response = playReq(name)
 	say response
+	request_completed
   end
   
   listen_for /itunes play (.*)/i do |name|
@@ -119,20 +108,28 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 		response = playReq(name)
 	end
 	say response
+	request_completed
   end
   
   listen_for /i tunes play (.*)/i do |name|
-	response = playReq(name)
+	if !name or name == "" or name == " "
+		response = takeAction('play')
+	else
+		response = playReq(name)
+	end
 	say response
+	request_completed
   end
   
   listen_for /itunes (.*)/i do |userAction|
 	response = takeAction(userAction)
 	say response
+	request_completed
   end
   
   listen_for /i tunes (.*)/i do |userAction|
 	response = takeAction(userAction)
 	say response
+	request_completed
   end
 end
