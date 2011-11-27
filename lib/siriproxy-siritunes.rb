@@ -113,7 +113,11 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
   end
   
   listen_for /itunes play (.*)/i do |name|
-	response = playReq(name)
+	if !name
+		response = takeAction('play')
+	else
+		response = playReq(name)
+	end
 	say response
   end
   
