@@ -1,0 +1,15 @@
+SiriTunes is a Siri Proxy plugin that allows you to play, pause, adjust the volume, skip to the next/previous track, and request specific songs, albums, and artists in iTunes on a Windows PC.
+
+SiriTunes was created by parm289.  You are free to use, modify, and redistribute this gem as long as proper credit is given to the original author.
+
+Usage:
+	Generally, you'll need to preface each request with "iTunes."  This avoids conflicts with Siri's control of the iPhone's internal music app.  The currently implemented commands are (with alternative commands in []):
+		"iTunes, play [put on] _____" (where ____ is a song title, artist, or album) - Plays a specific song, artist or album.
+		"iTunes, play" - Plays/unpauses iTunes (equivalent to clicking the play button in the iTunes appliation).
+		"iTunes, pause" - Pauses iTunes.
+		"iTunes, next [previous] song" - Skips to the next/previous song.
+		"iTunes, raise [lower] the volume" - Raises/lowers the iTunes volume.
+
+		
+Installation (untested):
+	To install SiriTunes, edit your Siri Proxy config.yml file to include the parameters listed in SiriTunes' config-info.yml file.  Then, run "bundle install" in your Siri Proxy directory to install the SiriTunes gem.
