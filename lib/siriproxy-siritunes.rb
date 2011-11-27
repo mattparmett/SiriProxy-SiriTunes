@@ -42,6 +42,9 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 		itunes.SoundVolume = itunes.SoundVolume + 20
 		say "Raising the volume."
 		request_completed
+	else
+		say "Sorry, I didn't understand your request."
+		request_completed
 	end
   end
   listen_for /i tunes (.*)/i do |userAction|
@@ -70,6 +73,9 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 	elsif userAction == 'raise the volume'
 		itunes.SoundVolume = itunes.SoundVolume + 20
 		say "Raising the volume."
+		request_completed
+	else
+		say "Sorry, I didn't understand your request."
 		request_completed
 	end
   end
