@@ -19,7 +19,7 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 	userAction = userAction.downcase
 	puts userAction
 	itunes = WIN32OLE.new('iTunes.Application')
-	if userAction == 'pause'
+	if userAction == 'pause' or userAction == 'pause '
 		itunes.PlayPause
 		say "iTunes is now paused."
 		request_completed
@@ -27,19 +27,19 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 		itunes.PlayPause
 		say "iTunes is now playing."
 		request_completed
-	elsif userAction == 'next song'
+	elsif userAction == 'next song' or userAction == 'next song '
 		itunes.NextTrack
 		say "Skipping to the next song."
 		request_completed
-	elsif userAction == 'previous song'
+	elsif userAction == 'previous song' or userAction == 'previous song '
 		itunes.PreviousTrack
 		say "Skipping to the previous song."
 		request_completed
-	elsif userAction == 'lower the volume'
+	elsif userAction == 'lower the volume' or userAction == 'lower the volume '
 		itunes.SoundVolume = itunes.SoundVolume - 20
 		say "Lowering the volume."
 		request_completed
-	elsif userAction == 'raise the volume'
+	elsif userAction == 'raise the volume' or userAction == 'raise the volume '
 		itunes.SoundVolume = itunes.SoundVolume + 20
 		say "Raising the volume."
 		request_completed
@@ -52,7 +52,7 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 	userAction = userAction.downcase
 	puts userAction
 	itunes = WIN32OLE.new('iTunes.Application')
-	if userAction == 'pause'
+	if userAction == 'pause' or userAction == 'pause '
 		itunes.PlayPause
 		say "iTunes is now paused."
 		request_completed
@@ -60,19 +60,19 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 		itunes.PlayPause
 		say "iTunes is now playing."
 		request_completed
-	elsif userAction == 'next song'
+	elsif userAction == 'next song' or userAction == 'next song '
 		itunes.NextTrack
 		say "Skipping to the next song."
 		request_completed
-	elsif userAction == 'previous song'
+	elsif userAction == 'previous song' or userAction == 'previous song '
 		itunes.PreviousTrack
 		say "Skipping to the previous song."
 		request_completed
-	elsif userAction == 'lower the volume'
+	elsif userAction == 'lower the volume' or userAction == 'lower the volume '
 		itunes.SoundVolume = itunes.SoundVolume - 20
 		say "Lowering the volume."
 		request_completed
-	elsif userAction == 'raise the volume'
+	elsif userAction == 'raise the volume' or userAction == 'raise the volume '
 		itunes.SoundVolume = itunes.SoundVolume + 20
 		say "Raising the volume."
 		request_completed
