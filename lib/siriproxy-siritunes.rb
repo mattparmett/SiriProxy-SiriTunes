@@ -3,11 +3,11 @@ require 'siri_objects'
 require 'win32ole'
 
 #######
-# This is a "hello world" style plugin. It simply intercepts the phrase "text siri proxy" and responds
-# with a message about the proxy being up and running (along with a couple other core features). This 
-# is good base code for other plugins.
-# 
-# Remember to add other plugins to the "config.yml" file if you create them!
+# SiriTunes is a Siri Proxy plugin that allows you to play, pause, adjust the volume, skip to the next/previous track, and request specific songs, albums, and artists in iTunes on a Windows PC.
+
+# Check the readme file for more detailed usage instructions
+
+# SiriTunes was created by parm289.  You are free to use, modify, and redistribute this gem as long as proper credit is given to the original author.
 ######
 
 class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
