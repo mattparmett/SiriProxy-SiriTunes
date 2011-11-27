@@ -17,12 +17,13 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 
   listen_for /itunes (.*)/i do |userAction|
 	userAction = userAction.downcase
+	puts userAction
 	itunes = WIN32OLE.new('iTunes.Application')
 	if userAction == 'pause'
 		itunes.PlayPause
 		say "iTunes is now paused."
 		request_completed
-	elsif userAction == 'play'
+	elsif userAction == 'play' or userAction == 'play '
 		itunes.PlayPause
 		say "iTunes is now playing."
 		request_completed
@@ -49,6 +50,7 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
   end
   listen_for /i tunes (.*)/i do |userAction|
 	userAction = userAction.downcase
+	puts userAction
 	itunes = WIN32OLE.new('iTunes.Application')
 	if userAction == 'pause'
 		itunes.PlayPause
