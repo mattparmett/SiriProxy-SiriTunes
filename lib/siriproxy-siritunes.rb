@@ -42,8 +42,8 @@ class SiriProxy::Plugin::SiriIMDB < SiriProxy::Plugin
 		itunes.SoundVolume = itunes.SoundVolume + 20
 		say "Raising the volume."
 		request_completed
+	end
   end
-  
   listen_for /i tunes (.*)/i do |userAction|
 	userAction = userAction.downcase
 	itunes = WIN32OLE.new('iTunes.Application')
@@ -71,6 +71,7 @@ class SiriProxy::Plugin::SiriIMDB < SiriProxy::Plugin
 		itunes.SoundVolume = itunes.SoundVolume + 20
 		say "Raising the volume."
 		request_completed
+	end
   end
   
   listen_for /itunes put on (.*)/i do |name|
