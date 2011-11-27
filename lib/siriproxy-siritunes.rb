@@ -15,7 +15,7 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
     #if you have custom configuration options, process them here!
   end
 
-  listen_for /itunes put on (.*)/i do |name|
+  def playReq(name)
 	name = name.split(' ').map {|w| w.capitalize }.join(' ')
 	itunes = WIN32OLE.new('iTunes.Application')
 	library = itunes.LibraryPlaylist
@@ -27,7 +27,7 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 		if !artist_tracks #artist wasn't found. check if the user said an album.
 			album_tracks = library.Search(name, 3)
 			if !album_tracks #album wasn't found.  We give up.
-				say "Sorry, I couldn't find " + name + " in your library."
+				return "Sorry, I couldn't find " + name + " in your library."
 				request_completed
 			else
 				songs = []
@@ -37,11 +37,11 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 				song = songs[0]
 				if !song
 					#We give up
-					say "Sorry, I couldn't find " + name + " in your library."
+					return "Sorry, I couldn't find " + name + " in your library."
 					request_completed
 				else
 					song.Play
-					say "Playing " + name + "."
+					return "Playing " + name + "."
 					request_completed
 				end
 			end
@@ -59,80 +59,76 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 			songNum = rand(songs.length)
 			song = songs[songNum]
 			song.Play
-			say "Playing " + name + "."
+			return "Playing " + name + "."
 			request_completed
 		end
 	else
 		song.Play
-		say "Playing " + name + "."
+		return "Playing " + name + "."
 		request_completed
 	end
   end
   
-  listen_for /itunes (.*)/i do |userAction|
+  def takeAction(userAction)
 	userAction = userAction.downcase
-	puts userAction
 	itunes = WIN32OLE.new('iTunes.Application')
 	if userAction == 'pause' or userAction == 'pause '
 		itunes.PlayPause
-		say "iTunes is now paused."
+		return "iTunes is now paused."
 		request_completed
 	elsif userAction == 'play' or userAction == 'play '
 		itunes.PlayPause
-		say "iTunes is now playing."
+		return "iTunes is now playing."
 		request_completed
 	elsif userAction == 'next song' or userAction == 'next song '
 		itunes.NextTrack
-		say "Skipping to the next song."
+		return "Skipping to the next song."
 		request_completed
 	elsif userAction == 'previous song' or userAction == 'previous song '
 		itunes.PreviousTrack
-		say "Skipping to the previous song."
+		return "Skipping to the previous song."
 		request_completed
 	elsif userAction == 'lower the volume' or userAction == 'lower the volume '
 		itunes.SoundVolume = itunes.SoundVolume - 20
-		say "Lowering the volume."
+		return "Lowering the volume."
 		request_completed
 	elsif userAction == 'raise the volume' or userAction == 'raise the volume '
 		itunes.SoundVolume = itunes.SoundVolume + 20
-		say "Raising the volume."
+		return "Raising the volume."
 		request_completed
 	else
-		say "Sorry, I didn't understand your request."
+		return "Sorry, I didn't understand your request."
 		request_completed
 	end
   end
+ 
+  listen_for /itunes put on (.*)/i do |name|
+	response = playReq(name)
+	say response
+  end
+  
+  listen_for /i tunes put on (.*)/i do |name|
+	response = playReq(name)
+	say response
+  end
+  
+  listen_for /itunes play (.*)/i do |name|
+	response = playReq(name)
+	say response
+  end
+  
+  listen_for /i tunes play (.*)/i do |name|
+	response = playReq(name)
+	say response
+  end
+  
+  listen_for /itunes (.*)/i do |userAction|
+	response = takeAction(userAction)
+	say response
+  end
+  
   listen_for /i tunes (.*)/i do |userAction|
-	userAction = userAction.downcase
-	puts userAction
-	itunes = WIN32OLE.new('iTunes.Application')
-	if userAction == 'pause' or userAction == 'pause '
-		itunes.PlayPause
-		say "iTunes is now paused."
-		request_completed
-	elsif userAction == 'play' or userAction == 'play '
-		itunes.PlayPause
-		say "iTunes is now playing."
-		request_completed
-	elsif userAction == 'next song' or userAction == 'next song '
-		itunes.NextTrack
-		say "Skipping to the next song."
-		request_completed
-	elsif userAction == 'previous song' or userAction == 'previous song '
-		itunes.PreviousTrack
-		say "Skipping to the previous song."
-		request_completed
-	elsif userAction == 'lower the volume' or userAction == 'lower the volume '
-		itunes.SoundVolume = itunes.SoundVolume - 20
-		say "Lowering the volume."
-		request_completed
-	elsif userAction == 'raise the volume' or userAction == 'raise the volume '
-		itunes.SoundVolume = itunes.SoundVolume + 20
-		say "Raising the volume."
-		request_completed
-	else
-		say "Sorry, I didn't understand your request."
-		request_completed
-	end
+	response = takeAction(userAction)
+	say response
   end
 end
