@@ -20,14 +20,14 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 	itunes = WIN32OLE.new('iTunes.Application')
 	library = itunes.LibraryPlaylist
 	tracks = library.Tracks
-	song = tracks.ItemByName(songName)
+	song = tracks.ItemByName(name)
 	if !song
 		#Song wasn't found.  Check if the user said an artist.
-		artist_tracks = library.Search(songName, 2)
+		artist_tracks = library.Search(name, 2)
 		if !artist_tracks #artist wasn't found. check if the user said an album.
-			album_tracks = library.Search(songName, 3)
+			album_tracks = library.Search(name, 3)
 			if !album_tracks #album wasn't found.  We give up.
-				say "Sorry, I couldn't find " + songName + " in your library."
+				say "Sorry, I couldn't find " + name + " in your library."
 				request_completed
 			else
 				songs = []
@@ -37,11 +37,11 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 				song = songs[0]
 				if !song
 					#We give up
-					say "Sorry, I couldn't find " + songName + " in your library."
+					say "Sorry, I couldn't find " + name + " in your library."
 					request_completed
 				else
 					song.Play
-					say "Playing " + songName + "."
+					say "Playing " + name + "."
 					request_completed
 				end
 			end
@@ -59,12 +59,12 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 			songNum = rand(songs.length)
 			song = songs[songNum]
 			song.Play
-			say "Playing " + songName + "."
+			say "Playing " + name + "."
 			request_completed
 		end
 	else
 		song.Play
-		say "Playing " + songName + "."
+		say "Playing " + name + "."
 		request_completed
 	end
   end
