@@ -54,7 +54,7 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 		itunes.PlayPause
 		say "iTunes is now paused."
 		request_completed
-	elsif userAction == 'play'
+	elsif userAction == 'play' or userAction == 'play '
 		itunes.PlayPause
 		say "iTunes is now playing."
 		request_completed
