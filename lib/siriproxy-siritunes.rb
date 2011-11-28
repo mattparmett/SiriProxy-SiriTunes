@@ -105,30 +105,33 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 	itunes = WIN32OLE.new('iTunes.Application')
 	currentTrackName = itunes.CurrentTrack.Name
 	currentTrackArtist = itunes.CurrentTrack.Artist
-	say currentTrackName + " by " currentTrackArtist + " is playing in iTunes."
+	say currentTrackName + " by " + currentTrackArtist + " is playing in iTunes."
 	request_completed
   end
   
-  # listen_for /i tunes what song is on/i do
-	# itunes = WIN32OLE.new('iTunes.Application')
-	# currentTrack = itunes.CurrentTrack
-	# say currentTrack.Name + " by " currentTrack.Artist + " is playing in iTunes."
-	# request_completed
-  # end
+  listen_for /i tunes what song is on/i do
+	itunes = WIN32OLE.new('iTunes.Application')
+	currentTrackName = itunes.CurrentTrack.Name
+	currentTrackArtist = itunes.CurrentTrack.Artist
+	say currentTrackName + " by " + currentTrackArtist + " is playing in iTunes."
+	request_completed
+  end
   
-  # listen_for (/itunes what's playing/i) do
-	# itunes = WIN32OLE.new('iTunes.Application')
-	# currentTrack = itunes.CurrentTrack
-	# say currentTrack.Name + " by " currentTrack.Artist + " is playing in iTunes."
-	# request_completed
-  # end
+  listen_for (/itunes what's playing/i) do
+	itunes = WIN32OLE.new('iTunes.Application')
+	currentTrackName = itunes.CurrentTrack.Name
+	currentTrackArtist = itunes.CurrentTrack.Artist
+	say currentTrackName + " by " + currentTrackArtist + " is playing in iTunes."
+	request_completed
+  end
   
-  # listen_for (/i tunes what's playing/i) do
-	# itunes = WIN32OLE.new('iTunes.Application')
-	# currentTrack = itunes.CurrentTrack
-	# say currentTrack.Name + " by " currentTrack.Artist + " is playing in iTunes."
-	# request_completed
-  # end
+  listen_for (/i tunes what's playing/i) do
+	itunes = WIN32OLE.new('iTunes.Application')
+	currentTrackName = itunes.CurrentTrack.Name
+	currentTrackArtist = itunes.CurrentTrack.Artist
+	say currentTrackName + " by " + currentTrackArtist + " is playing in iTunes."
+	request_completed
+  end
   
   listen_for /itunes play (.*)/i do |name|
 	if !name or name == "" or name == " "
