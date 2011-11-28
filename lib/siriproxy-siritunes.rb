@@ -74,10 +74,14 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
 		return "iTunes is now playing."
 	elsif userAction == 'next song' or userAction == 'next song '
 		itunes.NextTrack
-		return "Skipping to the next song."
+		currentTrackName = itunes.CurrentTrack.Name
+		currentTrackArtist = itunes.CurrentTrack.Artist
+		return "Skipping to the next song, " + currentTrackName + " by " + currentTrackArtist + "."
 	elsif userAction == 'previous song' or userAction == 'previous song '
 		itunes.PreviousTrack
-		return "Skipping to the previous song."
+		currentTrackName = itunes.CurrentTrack.Name
+		currentTrackArtist = itunes.CurrentTrack.Artist
+		return "Skipping to the previous song, " + currentTrackName + " by " + currentTrackArtist + "."
 	elsif userAction == 'lower the volume' or userAction == 'lower the volume '
 		itunes.SoundVolume = itunes.SoundVolume - 20
 		return "Lowering the volume."
