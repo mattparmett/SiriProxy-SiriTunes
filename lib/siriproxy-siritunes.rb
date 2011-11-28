@@ -103,8 +103,9 @@ class SiriProxy::Plugin::SiriTunes < SiriProxy::Plugin
   
   listen_for /itunes what song is on/i do
 	itunes = WIN32OLE.new('iTunes.Application')
-	currentTrack = itunes.CurrentTrack
-	say currentTrack.Name + " by " currentTrack.Artist + " is playing in iTunes."
+	currentTrackName = itunes.CurrentTrack.Name
+	currentTrackArtist = itunes.CurrentTrack.Artist
+	say currentTrackName + " by " currentTrackArtist + " is playing in iTunes."
 	request_completed
   end
   
