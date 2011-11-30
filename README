@@ -6,7 +6,7 @@ SiriTunes was created by parm289.  You are free to use, modify, and redistribute
 
 Usage:
 	Generally, you'll need to preface each request with "iTunes."  This avoids conflicts with Siri's control of the iPhone's internal music app.  The currently implemented commands are (with alternative commands in []):
-		"iTunes, play [put on] _____" (where ____ is a song title, artist, or album) - Plays a specific song, artist or album.
+		"iTunes, put on _____" (where ____ is a song title, artist, or album) - Plays a specific song, artist or album.
 		"iTunes, play" - Plays/unpauses iTunes (equivalent to clicking the play button in the iTunes appliation).
 		"iTunes, pause" - Pauses iTunes.
 		"iTunes, next [previous] song" - Skips to the next/previous song.
